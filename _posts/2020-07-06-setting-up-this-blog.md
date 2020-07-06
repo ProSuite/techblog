@@ -66,7 +66,7 @@ and the initial content. Do not repeat -- it was already done
 and is documented here only for reference.
 
 - Log in to <https://GitHub.com/ProSuite>
-- Create new repository `TechBlog`, visibility `Public`
+- Create new repository `techblog`, visibility `Public`
 - Open a Git Bash command line
 - `git init ProSuiteTechBlog`
 - `cd ProSuiteTechBlog`
@@ -74,13 +74,13 @@ and is documented here only for reference.
 - optional: edit partials, styles, posts, etc.
 - edit `_config.yml`: set `baseurl: /techblog` and `url: "https://prosuite.github.io"`
 - `git commit -m "Initial commit"`
-- `git remote add origin https://github.com/ProSuite/TechBlog.git`
+- `git remote add origin https://github.com/ProSuite/techblog.git`
 - `git push -u origin master`
-- Go again to <https://GitHub.com/ProSuite/TechBlog>
+- Go again to <https://GitHub.com/ProSuite/techblog>
   and in the repo's settings, choose “master branch”
   for the source; do not modify the theme.
 - Now GitHub Pages should build the site; this may take some time.
-- Check the generated site: <https://ProSuite.GitHub.io/TechBlog>
+- Check the generated site: <https://ProSuite.GitHub.io/techblog>
 
 ## Authoring
 
@@ -104,7 +104,7 @@ It is also possible to write articles directly on the GitHub.com site.
 
 [Jekyll]: https://jekyllrb.com
 [ghpages]: https://pages.github.com
-[blogrepo]: https://github.com/ProSuite/TechBlog
+[blogrepo]: https://github.com/ProSuite/techblog
 [gfm]: https://guides.github.com/features/mastering-markdown/
 [liquid]: https://shopify.github.io/liquid/
 [sass]: https://sass-lang.com/

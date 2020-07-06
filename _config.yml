@@ -23,7 +23,7 @@ author: The ProSuite Authors
 #email: your-email@example.com
 description: >- # ignore newlines until next entry
   Articles on technical topics related to ProSuite, ArcGIS, and GIS in general.
-baseurl: "/TechBlog" # the subpath of your site, e.g., /blog (case sensitive!)
+baseurl: "/techblog" # the subpath of your site, e.g., /blog (case sensitive!)
 url: "https://prosuite.github.io" # hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb
 github_username: ProSuite

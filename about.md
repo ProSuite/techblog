@@ -23,7 +23,7 @@ a [CC BY][ccby] license.
 
 This is a static blog generated using [Jekyll][jekyll]
 and hosted at [GitHub Pages][ghpages]. The publishing source
-is [github.com/ProSuite/TechBlog](https://github.com/ProSuite/TechBlog).
+is [github.com/ProSuite/techblog](https://github.com/ProSuite/techblog).
 
 Blog articles “live” in this repository as markdown files
 in the `_posts` directory. See any of the existing articles
