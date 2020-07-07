@@ -2,17 +2,23 @@
 layout: post
 title: Shared Assembly Attributes
 author: ujr
-date: 2020-07-03
+date: 2020-07-07
 ---
+
+**Abstract:** in a solution with many projects, it may be useful
+to extract constant information from the per-project *AssemblyInfo.cs*
+into a solution-wide *SharedAssemblyInfo.cs* file.
+
+## About Assembly Attributes
 
 An assembly (.dll or .exe file) contains four types
 of data: (1) an assembly manifest, (2) an application
 manifest, (3) compiled code, (4) resources.
 
-The assembly manifest is automatically embedded into the assembly
-by the compiler. It contains the assembly name and version,
-a directory of contained types and resources, and other meta
-information.
+The assembly manifest contains assembly name and version,
+a directory of contained types and resources, and other
+meta information. It is automatically embedded into the
+assembly by the compiler.
 
 Name, version, and meta information is provided by
 `[assembly: AssemblyFoo(...)]` attributes. They must
@@ -162,7 +168,7 @@ provide tasks for this job, but both projects appear to be dormant.
   (to which it defaults). May be useful for a nicely “human readable”
   version indication along with the product name.
 
-Example of the *SharedAssemblyInfo.cs* file:
+### Example *S*haredAssemblyInfo.cs* (solution-wide)
 
 ```C#
 using System.Reflection;
@@ -183,7 +189,7 @@ using System.Reflection;
 [assembly: AssemblyInformationalVersion("1.2 patch 3")]
 ```
 
-Example of a per-project *AssemblyInfo.cs* files:
+### Example *AssemblyInfo.cs* (per-project)
 
 ```C#
 using System;
