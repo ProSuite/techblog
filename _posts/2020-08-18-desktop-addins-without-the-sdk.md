@@ -99,6 +99,7 @@ references to the PIAs.
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <TargetArcGISVersion Condition=" '$(TargetArcGISVersion)' == '' ">10.5</TargetArcGISVersion>
+    <TargetFrameworkVersion Condition=" '$(TargetFrameworkVersion)' == '' ">v4.5</TargetFrameworkVersion>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MyProject</RootNamespace>
@@ -129,7 +130,7 @@ references to the PIAs.
     <Compile Include="Config.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Config.esriaddinx</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -161,10 +162,11 @@ environment variables. For example:
 ```batch
 @cd /d "%~dp0"
 
-@rem set TargetFrameworkVersion=v4.5
 set TargetArcGISVersion=10.5
+set TargetFrameworkVersion=v4.5
 
 @set VS="C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\devenv.exe"
+
 %VS% MySolution.sln
 ```
 
@@ -176,65 +178,64 @@ which is a Zip archive, from the build artifacts:
 <Project DefaultTargets="Dist" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <!-- Defaults in case the Build target is called directly (not via Dist) -->
     <TargetArcGISVersion Condition=" '$(TargetArcGISVersion)' == '' ">10.5</TargetArcGISVersion>
-    <ProjectFile>..\src\MyProject\MyProject.csproj</ProjectFile>
-    <OutputPath>..\src\MyProject\bin\Debug</OutputPath>
-    <!--How to modify Config.esriaddinx for given ArcGIS version-->
+    <TargetFrameworkVersion Condition=" '$(TargetFrameworkVersion)' == '' ">v4.5</TargetFrameworkVersion>
+    <!-- For easy reference below -->
+    <ProjectPath>..\src\MyProject</ProjectPath>
+    <OutputPath>..\src\MyProject\bin\$(Configuration)</OutputPath>
+    <ProjectFile>$(ProjectPath)\MyProject.csproj</ProjectFile>
+    <!-- How to update Config.esriaddinx (Namespace must be a well-formed XML fragment) -->
     <EsriAddInNamespace>&lt;Namespace Prefix='x' Uri='http://schemas.esri.com/Desktop/AddIns'/&gt;</EsriAddInNamespace>
     <TargetVersionQuery>/*/x:Targets[count(./x:Target[@name='Desktop'])=1]/x:Target[@name='Desktop']/@version</TargetVersionQuery>
   </PropertyGroup>
 
   <Target Name="Clean">
-    <RemoveDir Directories="output\MyProject\10.5"
-               Condition="Exists('output\MyProject\10.5')" />
-    <RemoveDir Directories="output\MyProject\10.6"
-               Condition="Exists('output\MyProject\10.6')" />
+    <RemoveDir Directories="output\MyProject\10.5" Condition="Exists('output\MyProject\10.5')" />
+    <RemoveDir Directories="output\MyProject\10.6" Condition="Exists('output\MyProject\10.6')" />
   </Target>
 
   <Target Name="Dist" DependsOnTargets="Clean">
-    <!--Recursive MSBuild so that we can change Properties (CallTarget won't work)-->
+    <!-- Recursive MSBuild so that we can change Properties (CallTarget will not work) -->
     <MSBuild Projects="$(MSBuildProjectFile)" Targets="Build"
-             Properties="TargetArcGISVersion=10.5" />
+             Properties="TargetArcGISVersion=10.5;TargetFrameworkVersion=v4.5" />
     <MSBuild Projects="$(MSBuildProjectFile)" Targets="Build"
-             Properties="TargetArcGISVersion=10.6" />
+             Properties="TargetArcGISVersion=10.6;TargetFrameworkVersion=v4.5" />
   </Target>
 
   <Target Name="Build">
+
+    <PropertyGroup>
+      <TargetFolder>output\MyProject\$(TargetArcGISVersion)</TargetFolder>
+      <TargetAddInFile>output\MyProject\MyProject.ArcMap.$(TargetArcGISVersion).esriAddIn</TargetAddInFile>
+    </PropertyGroup>
 
     <MSBuild Projects="$(ProjectFile)" Targets="Clean"
              Properties="Configuration=$(Configuration)" />
 
     <MSBuild Projects="$(ProjectFile)" Targets="Build"
-             Properties="TargetArcGISVersion=$(TargetArcGISVersion);Configuration=$(Configuration)" />
+             Properties="Configuration=$(Configuration);TargetArcGISVersion=$(TargetArcGISVersion);TargetFrameworkVersion=$(TargetFrameworkVersion)" />
 
     <ItemGroup>
-      <OutputFiles Include="$(OutputPath)\**\*.dll" />
-      <OutputFiles Include="$(OutputPath)\**\*.pdb" />
-      <ImageFiles Include="$(OutputPath)\Images\*.png" />
-      <ImageFiles Include="$(OutputPath)\Images\*.jpg" />
+      <OutputFiles Include="$(OutputPath)\**\*.*" Exclude="$(OutputPath)\Images\**\*.*" />
+      <ImageFiles Include="$(OutputPath)\Images\**\*.*" />
       <ConfigFile Include="$(OutputPath)\Config.esriaddinx" />
     </ItemGroup>
 
-    <Copy SourceFiles="@(OutputFiles)"
-          DestinationFolder="output\MyProject\$(TargetArcGISVersion)\Install" />
-    <Copy SourceFiles="@(ImageFiles)"
-          DestinationFolder="output\MyProject\$(TargetArcGISVersion)\Images" />
-    <Copy SourceFiles="@(ConfigFile)"
-          DestinationFiles="output\MyProject\$(TargetArcGISVersion)\Config.xml" />
+    <Copy SourceFiles="@(OutputFiles)" DestinationFolder="$(TargetFolder)\Install\" />
+    <Copy SourceFiles="@(ImageFiles)"  DestinationFolder="$(TargetFolder)\Images" />
+    <Copy SourceFiles="@(ConfigFile)"  DestinationFiles="$(TargetFolder)\Config.xml" />
 
-    <CallTarget Targets="UpdateAddInConfig" />
-
-    <ZipDirectory SourceDirectory="output\Tools\$(TargetArcGISVersion)"
-                  DestinationFile="output\KtZH.FaBo.Tools.$(TargetArcGISVersion).esriAddIn"
-                  Overwrite="true" />
-  </Target>
-
-  <Target Name="UpdateAddInConfig">
-    <XmlPoke XmlInputPath="output\Tools\$(TargetArcGISVersion)\Config.xml"
+    <XmlPoke XmlInputPath="$(TargetFolder)\Config.xml"
              Query="$(TargetVersionQuery)"
              Value="$(TargetArcGISVersion)"
              Namespaces="$(EsriAddInNamespace)" />
+
+    <ZipDirectory SourceDirectory="$(TargetFolder)"
+                  DestinationFile="$(TargetAddInFile)"
+                  Overwrite="true" />
   </Target>
+
 </Project>
 ```
 
