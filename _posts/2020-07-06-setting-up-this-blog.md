@@ -55,7 +55,7 @@ A blog-aware static site generator written in Ruby:
 
 ## Installation
 
-Local installation assuming Windows (each contributor):
+Local installation assuming Windows (each contributor, optional):
 
 - Install Ruby: use the RubyInstaller from <https://www.ruby-lang.org/en/documentation/installation/>
 - Optional: Install Bundler: see <https://bundler.io> (I did not do it)
@@ -84,23 +84,10 @@ and is documented here only for reference.
 
 ## Authoring
 
-Once: Install Ruby and Jekyll, clone the repository.
-
-1. Create your article's file in the `_posts`  directory
-   (or in the `_drafts` director if it is not yet to be published).
-2. Run `jekyll serve --baseurl "" --drafts` in the checkout directory;
-   this watches the file system for changes, automatically rebuilds the
-   site, and publishes the site at [localhost:4000](http://127.0.0.1:4000).
-   (The --baseurl option is to override the same config setting
-   in order to get this prefix out of the way for local testing.)
-3. Preview, edit, loop until satisfied
-4. Git: commit and push
-5. GitHub Pages should now automatically run the site
-   through Jekyll and publish the resulting site.
-   Verify at <https://prosuite.github.io/techblog>.
-   Remember that posts in `_drafts` will not be published.
-
-It is also possible to write articles directly on the GitHub.com site.
+Git clone this repository.  
+Follow instructions in the root README.md file.  
+You need Jekyll and Ruby only for previewing.  
+If bold enough, just write your articles.
 
 [Jekyll]: https://jekyllrb.com
 [ghpages]: https://pages.github.com
