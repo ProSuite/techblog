@@ -2,11 +2,13 @@
 layout: post
 title: Copy Archive-Enabled Class from Oracle User Schema to SDE Master Schema
 author: ujr
+date: 2020-11-24
 ---
 
-This article explains how to move an archived table (or feature class)
+This article explains how to copy an archived table (or feature class)
 from an Oracle user-schema geodatabase to the master SDE geodatabase,
-*keeping the archived records*. It works only for non-versioned tables.
+*keeping the archived records*. The procedure works for non-versioned
+tables only.
 
 ## Background
 
@@ -17,14 +19,15 @@ the schema of a user other than the SDE user is called a
 **user-schema geodatabase**. It is *not* completely independent
 from the master geodatabase. ArcGIS tends to become slower if
 there are user-schema geodatabases in Oracle. Probably for this
-reason they are no longer fashionable and have long been discouraged.
-Since version 10.7 (Pro 2.3) you can no longer create user-schema
-geodatabases.
+reason they have long been discouraged. Since ArcGIS version 10.7
+(ArcGIS Pro 2.3) you can no longer create user-schema geodatabases.
 
 ## Archiving
 
+Archiving keeps old records, allowing you to “view into the past.”
+
 If archiving is enabled for a non-versioned geodatabase table *FOO*,
-ArcGIS adds fields `GDB_FROM_DATE`, `GDB_TO_DATE`, `GDB_ARCHIVE_OID`
+ArcGIS adds fields `GDB_FROM_DATE`, `GDB_TO_DATE`, `GDB_ARCHIVE_OID`,
 and creates a view *FOO*_EVW without the additional fields and where
 `GDB_TO_DATE` is 9999-12-31, that is, showing only records that exist
 at present. ArcGIS Pro and ArcMap show this view, but by the name of
@@ -107,6 +110,9 @@ this resulted in a duplicate OBJECTID field. Reason: unknown.
 
 Obviously, you will have to adjust this snippet to your
 situation, and you will need appropriate connection files.
+If you have many tables to copy, you will want to parameterize
+and generalize this script. For example, do not hard-code the
+fields, but get them using *arcpy.Describe()* or *arcpy.ListFields()*.
 Good luck.
 
 [multiple]: https://desktop.arcgis.com/en/arcmap/10.3/manage-data/gdbs-in-oracle/multiple-geodatabases-oracle.htm
