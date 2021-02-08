@@ -17,9 +17,9 @@ Built with Jekyll and hosted by GitHub Pages.
    where `yyyy-mm-dd` the date of first publication.
    Do not change the file name of published articles.
 3. Place images used by articles in the *images* folder and
-   reference them as `![Beautiful Image](/images/my-image.png)`.
+   reference them as `![Beautiful Image]({{ site.baseurl }}/images/my-image.png)`.
    Use as specific a name for the image as possible.
-   Note: absolute path. Use of the alt text highly recommended.
+   Use of the alt text highly recommended.
 4. Local preview: requires that you installed Ruby and Jekyll.
    Run the *serve.bat* file, which invokes *jekyll* with the
    proper arguments for previewing: it watches the file system

@@ -14,7 +14,7 @@ In order to use spatial tables created with a ST_Geometry column in ArcGIS clien
 
 What is missing on the internet is a documentation of all the tables that make up the schema of the ST_Geometry type (which is a subset of the metadata tables in a geodatabase). So here it is:
 
-![ST_Geometry type schema](/images/2020-11-28-st-geometry-schema.svg)
+![ST_Geometry type schema]({{ site.baseurl }}/images/2020-11-28-st-geometry-schema.svg)
 
 A few notes on some of these tables:
 
