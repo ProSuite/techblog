@@ -16,14 +16,18 @@ Built with Jekyll and hosted by GitHub Pages.
    in *_drafts* and `yyyy-mm-dd-kebab-case-name.md` in *_posts*,
    where `yyyy-mm-dd` the date of first publication.
    Do not change the file name of published articles.
-3. Local preview: requires that you installed Ruby and Jekyll.
+3. Place images used by articles in the *images* folder and
+   reference them as `![Beautiful Image](/images/my-image.png)`.
+   Use as specific a name for the image as possible.
+   Note: absolute path. Use of the alt text highly recommended.
+4. Local preview: requires that you installed Ruby and Jekyll.
    Run the *serve.bat* file, which invokes *jekyll* with the
    proper arguments for previewing: it watches the file system
    for changes, automatically rebuilds the site, and publishes
    the site at [localhost:4000](http://127.0.0.1:4000).
-4. Once satisfied, `git commit` to the master branch and
+5. Once satisfied, `git commit` to the master branch and
    `git push` to the GitHub repo.
-5. GitHub Pages should now automatically run the site
+6. GitHub Pages should now automatically run the site
    through Jekyll and publish the resulting site.
    Verify at <https://prosuite.github.io/techblog>.
    Remember that posts in *_drafts* will not be published.

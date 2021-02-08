@@ -14,9 +14,7 @@ In order to use spatial tables created with a ST_Geometry column in ArcGIS clien
 
 What is missing on the internet is a documentation of all the tables that make up the schema of the ST_Geometry type (which is a subset of the metadata tables in a geodatabase). So here it is:
 
-![](2021-01-08-st-geometry-schema.svg)
-
-
+![ST_Geometry type schema](/images/2020-11-28-st-geometry-schema.svg)
 
 A few notes on some of these tables:
 
@@ -29,4 +27,3 @@ A few notes on some of these tables:
 **ST_PARTITION_INDEX** strictly for people who know what they are doing (I don't know of anybody using this).
 
 **ORA_OPEN_CURSORS** is relevant if you experience random crashes of the client application. Setting [verbose for the direct connect log](https://esriaustraliatechblog.wordpress.com/2016/09/22/faq-how-do-you-turn-on-verbose-logging-when-connecting-to-an-enterprise-geodatabase/) can give a hint by showing the *wrong* OPEN_CURSORS initialization parameter (e.g. SGA_Param - Open_Cursors: 300 instead the actual 2000). Apparently, the connected user cannot see the oracle initialization parameter and therefore it has to be "cached" in this table. For some reason, the geodatabase wants to know before ORA-01000 would happen so it can crash the process preemptively (or at least this happened at 10.5)! Therefore after changing the OPEN_CURSORS parameter in oracle (e.g. to the recommended 2000), the stored procedure [sde.gdb_util.update_open_cursors](https://desktop.arcgis.com/en/arcmap/latest/manage-data/gdbs-in-oracle/update-open-cursors.htm) must be run as it states in the documentation. Otherwise one might end up with a multi-month headache due to seemingly random crashes in the production database!
-
