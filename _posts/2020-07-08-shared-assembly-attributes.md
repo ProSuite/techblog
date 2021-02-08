@@ -42,9 +42,10 @@ Common assembly attributes include:
 
 ## Showing Attributes
 
-To see all assembly attributes use a tool like [ILSpy][ilspy].
-Some assembly attributes are shown by the **File Properties**
-dialog in Windows Explorer as indicated in this table:
+To see all assembly attributes use a tool like [ILSpy][ilspy]
+or [dotPeek][dotPeek]. Some assembly attributes are shown by
+the **File Properties** dialog in Windows Explorer as indicated
+in this table:
 
 |Property|Attribute|
 |--------|---------|
@@ -168,7 +169,7 @@ provide tasks for this job, but both projects appear to be dormant.
   (to which it defaults). May be useful for a nicely “human readable”
   version indication along with the product name.
 
-### Example *S*haredAssemblyInfo.cs* (solution-wide)
+### Example *SharedAssemblyInfo.cs* (solution-wide)
 
 ```C#
 using System.Reflection;
@@ -218,5 +219,6 @@ using System.Runtime.InteropServices;
 - Microsoft Documentation: [AssemblyCultureAttribute Class](https://docs.microsoft.com/en-us/dotnet/api/system.reflection.assemblycultureattribute)
 
 [ilspy]: https://github.com/icsharpcode/ILSpy
+[dotPeek]: https://www.jetbrains.com/decompiler/
 [mepack]: https://www.nuget.org/packages/MSBuild.Extension.Pack/
 [mctasks]: https://github.com/loresoft/msbuildtasks/
