@@ -70,6 +70,7 @@ When opening the client certificate an **authentication dialog can pop up** aski
 Various other things could potentially go wrong, such as a [different private key format](https://www.pkisolutions.com/accessing-and-using-certificate-private-keys-in-net-framework-net-core/). So make sure you really want to go down that rabbit hole before you consider mutual TLS.
 
 ## Some Caveats
+Whenever a connection problem appears, the first step is to enable extra logging as described in the [troubleshooting guide](https://github.com/grpc/grpc/blob/master/TROUBLESHOOTING.md). Start with set GRPC_VERBOSITY=DEBUG.
 ### Host Address in the Certificate
 The symptom for this issue is the **Failed to pick subchannel** exception:
 
@@ -89,6 +90,11 @@ DNS-Related errors sometimes come down to the VPN not being started *before* the
 set GRPC_DNS_RESOLVER=native
 
 If this is an issue on a production server rather than on a development notebook, something needs to be done!
+
+### Proxy
+Proxy problems are independent of the use of TLS. If the verbose log shows something like 
+Connecting to server localhost:5153 via HTTP proxy ipv4:10.20.876.100:8080
+shortly before the connection failure, the likely reason is a proxy setting in Windows that has no exception for localhost. To prevent grpc from using the configured proxy either set no_proxy=localhost or disable using the proxy in code by means of the channel option grpc.enable_http_proxy with value 0.
 
 ## Summary
 
