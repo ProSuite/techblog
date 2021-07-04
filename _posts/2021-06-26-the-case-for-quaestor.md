@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The case for Quaestor - Load balancing and cluster management.
+title: The case for Quaestor - Load balancing and cluster management
 author: ema
 date: 2021-07-04
 ---
