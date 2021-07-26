@@ -6,7 +6,7 @@ It is mostly a mnemonic device for The ProSuite Authors,
 but if anybody else finds it useful, that would please
 us even more.
 
-Built with Jekyll and hosted by GitHub Pages.
+Built with Jekyll and hosted on GitHub Pages.
 
 ## Authoring
 
@@ -19,8 +19,8 @@ Built with Jekyll and hosted by GitHub Pages.
 3. Place images used by articles in the *images* folder and
    reference them as `![Beautiful Image]({{ site.baseurl }}/images/my-image.png)`.
    Use as specific a name for the image as possible.
-   Use of the alt text highly recommended.
-4. Local preview: requires that you installed Ruby and Jekyll.
+   Use of the alt text is highly recommended.
+4. Local preview requires that you have installed Ruby and Jekyll.
    Run the *serve.bat* file, which invokes *jekyll* with the
    proper arguments for previewing: it watches the file system
    for changes, automatically rebuilds the site, and publishes
@@ -29,7 +29,7 @@ Built with Jekyll and hosted by GitHub Pages.
    `git push` to the GitHub repo.
 6. GitHub Pages should now automatically run the site
    through Jekyll and publish the resulting site.
-   Verify at <https://prosuite.github.io/techblog>.
+   Verify at <https://prosuite.github.io/techblog> after a few minutes.
    Remember that posts in *_drafts* will not be published.
 
 Hint: [Visual Studio Code][vscode] has good support for Markdown.

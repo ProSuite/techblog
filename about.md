@@ -9,12 +9,12 @@ of articles on technical topics related to ProSuite, Esri,
 Programming, and GIS in general. Articles are written by
 the ProSuite Authors in the hope that they are useful,
 not least to themselves. All content is available under
-a [CC BY][ccby] license.
+a [CC BY 4.0][ccby] license.
 
 ## Related Resources
 
-- [ProSuite QA Extension](https://www.esri.ch/de/produkte/prosuite-qa-extension)
-- [developers.arcgis.com/](https://developers.arcgis.com/)
+- [ProSuite](https://github.com/prosuite) productivity extension for ArcGIS
+- [developers.arcgis.com](https://developers.arcgis.com/)
 - [gis.stackexchange.com](https://gis.stackexchange.com/)
 - [GeoNet: the Esri Community](https://community.esri.com/)
 - [ArcGIS Pro SDK for .NET](https://pro.arcgis.com/en/pro-app/sdk/)
@@ -35,6 +35,7 @@ here it can be committed to source control and will
 be shown locally, but *not* published. Once ready for
 publication, move it from *_drafts* to *_posts* and
 give it a name conforming to the convention for posts.
+See the repo-level README for details.
 
 [jekyll]: https://jekyllrb.com/
 [ghpages]: https://pages.github.com/
