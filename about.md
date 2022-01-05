@@ -5,7 +5,7 @@ permalink: /about/
 ---
 
 Welcome to the ProSuite Tech Blog. This is a loose series
-of articles on technical topics related to ProSuite, Esri,
+of articles on technical topics related to ProSuite, ArcGIS,
 Programming, and GIS in general. Articles are written by
 the ProSuite Authors in the hope that they are useful,
 not least to themselves. All content is available under
@@ -14,6 +14,8 @@ a [CC BY 4.0][ccby] license.
 ## Related Resources
 
 - [ProSuite](https://github.com/prosuite) productivity extension for ArcGIS
+- [Dira GeoSystems](https://dirageosystems.ch) for
+  related support and development
 - [developers.arcgis.com](https://developers.arcgis.com/)
 - [gis.stackexchange.com](https://gis.stackexchange.com/)
 - [GeoNet: the Esri Community](https://community.esri.com/)
