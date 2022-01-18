@@ -40,7 +40,7 @@ Though a similar approach could be used, we see no need for it.
   - References to *ESRI.ArcGIS.Foo.dll*: if building for multiple
     ArcGIS versions, use a HintPath with an environment variable
     to hint at the proper version of the DLL. See example below.
-    Be sure the set Private=False.
+    Be sure to set Private=False.
   - Cleanup:
     remove the property group with the *esriAddIn* ZipFileExtension,
     and remove the element with the ESRIAddInProperties; you may
@@ -262,13 +262,15 @@ The automatic generation of *Config.Designer.cs* from
 *Config.esriaddinx* will be gone. You have to maintain
 this file manually. In my opinion, this is a small price
 to pay. Indeed, I believe the dependency should be the
-other way round: auto-generate *Conig.esriaddinx* from
+other way round: auto-generate *Config.esriaddinx* from
 code and attributes.
 
 The *Config.Designer.cs* file also contains some “static”
 code. You may want to (1) start with the SDK to have it
 generate this code, or (2) copy it from another project,
 or (3) write it yourself.
+
+You still need ESRI.ArcGIS.Desktop.AddIns.dll from the SDK.
 
 The approach described so far will not build and deploy
 the Add-In from within VS. However, this is useful during
