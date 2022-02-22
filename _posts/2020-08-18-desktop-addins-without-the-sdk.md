@@ -281,7 +281,23 @@ above, then copy it to the well-known location, which is:
 `%USERPROFILE%\Documents\ArcGIS\AddIns\Desktop%ArcGISVersion%\%AddInID%\`
 
 You could use the MSBuild XmlPeek task to extract the `AddInID`
-from *Config.esriaddinx*.
+from *Config.esriaddinx*. Here is a sketch:
+
+``` xml
+<XmlPeek XmlInputPath="...\Config.esriaddinx"
+         Query="/*/x:AddInID[1]/text()"
+         Namespaces="<Namespace Prefix='x' Uri='http://schemas.esri.com/Desktop/AddIns'/>">
+  <Output TaskParameter="Result" ItemName="AddInIDItem" />
+</XmlPeek>
+
+<PropertyGroup>
+  <!-- Make property from (hopefully) singleton item: -->
+  <AddInID>@(AddInIDItem)</AddInID>
+</PropertyGroup>
+
+<Copy SourceFiles="path\to\built\AddInName.esriAddIn"
+      DestinationFiles="$(USERPROFILE)\Documents\ArcGIS\AddIns\Desktop10.X\$(AddInID)\AddInName.esriAddIn" />
+```
 
 ## Signing
 
